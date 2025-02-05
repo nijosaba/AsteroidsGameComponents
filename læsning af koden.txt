@@ -1,0 +1,84 @@
+
+Starter med at identificere interface og deres indhold
+
+fx: public interface IGamePluginService {
+
+        void start(GameData gameData, World world);
+
+        void stop(GameData gameData, World world);
+    }
+
+    start(GameData gameData, World world): This method is called to initialize the plugin. It takes GameData and World as parameters, which provide the necessary context and entities for the plugin to set up.
+    stop(GameData gameData, World world): This method is called to clean up the plugin. It also takes GameData and World as parameters, allowing the plugin to remove any entities or resources it created during the start method.
+ser start og stop. start har fx 4 implementationer herunder playerPlugin, så kigger vi på playerPlugin.
+
+Start-metoden i playerPlugin starter programmet med player:
+Linjen player = new Entity(); opretter en ny spillerentitet
+world.addEntity(player); tilføjer denne spillerentitet til verdenen/banen
+
+GamePluginService-interfacet bruges til at oprette og fjerne spilkomponenter som f.eks. en spiller eller en bullet ved at
+tilføje den nødvendige logik i start- og stop-metoderne for at implementere dem i spillet.
+
+Nu til næste interface:
+public interface IPostEntityProcessingService {
+
+    void process(GameData gameData, World world);
+}
+
+Dette interface definerer en metode process, som bruges til at behandle entiteter efter, at de er blevet oprettet og tilføjet til verdenen.
+Implementeringer af dette interface vil typisk indeholde logik til at opdatere entiteters tilstand baseret på spillets data og verdenens tilstand.
+
+SÅ det OPDATERE entiteterne i spillet. fx player entity
+
+CollisionDetector implements the IPostEntityProcessingService interface, which requires the implementation of the process method.
+This method is called to process entities after they have been added to the world.
+
+CollisionDetector er ansvarlig for at detektere kollisioner mellem entiteter i spillet og udføre de nødvendige handlinger baseret på disse kollisioner.
+
+sidste Interface er: IEntityProcessingService
+public interface IEntityProcessingService {
+
+    void process(GameData gameData, World world);
+}
+den er dog brugt til et andet formål. den opdaterer entiteterne under gameloopet.
+
+In summary, IPostEntityProcessingService is used for processing entities after they are added to the world,
+while IEntityProcessingService is used for updating entities during the game loop.
+
+Collision detection often needs to occur after all entities have been updated.
+By using IPostEntityProcessingService, you ensure that all entity updates are complete before checking for collisions,
+leading to more accurate and consistent results.
+
+fx:
+The PlayerControlSystem implements the IEntityProcessingService interface to update the player's state based on user input
+during the game loop. This ensures that the player's actions, such as moving left, right, up, or shooting, are processed in real-time as the game runs.
+
+The IEntityProcessingService updates the entities during the game loop, such as handling player input and moving entities.
+After all entities have been updated, the IPostEntityProcessingService can then be used to handle tasks like collision detection.
+This ensures that all entity updates are complete before checking for collisions, leading to more accurate and consistent results.
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+En Entity er en abstraktion af et objekt i spillet, og den kan indeholde en vilkårlig mængde komponenter.
+En komponent er en klasse, der indeholder data og/eller funktionalitet, der er relateret til en bestemt opgave eller egenskab.
+I dette tilfælde opretter vi en ny Entity, der repræsenterer en spiller i spillet.
+
+
+Hvad er en Entity og en komponent i et Entity-Component-System (ECS)?
+Et Entity-Component-System (ECS) er et designmønster, der bruges til at organisere spilobjekter og funktionalitet i et spil.
+og det er en måde at strukturere spillogikken på, der adskiller data og funktionalitet i separate komponenter, der kan genbruges og kombineres på tværs af forskellige typer objekter.
+og komponent er en klasse, der indeholder data og/eller funktionalitet, der er relateret til en bestemt opgave eller egenskab.
+.
+
+hvad er modul for noget?
+Et modul er en selvstændig enhed af software, der kan genbruges og kombineres med andre moduler for at opbygge større systemer.
+Det er en måde at organisere og strukturere kode på, der gør det lettere at vedligeholde, genbruge og udvide software.
+og det er en måde at opdele komplekse systemer i mindre, mere håndterbare dele, der kan arbejde sammen for at opnå en bestemt funktionalitet eller opgave.
+
+hvad er contracts?
+Contracts er en måde at specificere og dokumentere, hvordan en klasse eller metode skal bruges og opføre sig.
+De definerer de forventede input, output og adfærd for en klasse eller metode og giver en klar og præcis beskrivelse af, hvad der forventes af dem.
+Contracts kan hjælpe med at forhindre fejl og misforståelser ved at definere klart, hvad der forventes af en klasse eller metode, og hvordan den skal bruges korrekt.
+fx ved at specificere, hvilke parametre der skal gives, og hvilke undtagelser der kan kastes, hvis der opstår problemer.
