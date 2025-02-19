@@ -7,7 +7,7 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
-public class AsteroidProcessor implements IEntityProcessingService {
+public class AsteroidProcessor implements IEntityProcessingService { //movement of asteroids
 
     private IAsteroidSplitter asteroidSplitter = new AsteroidSplitterImpl();
 
@@ -15,11 +15,11 @@ public class AsteroidProcessor implements IEntityProcessingService {
     public void process(GameData gameData, World world) {
 
         for (Entity asteroid : world.getEntities(Asteroid.class)) {
-            double changeX = Math.cos(Math.toRadians(asteroid.getRotation()));
-            double changeY = Math.sin(Math.toRadians(asteroid.getRotation()));
+            double changeX = Math.cos(Math.toRadians(asteroid.getRotation()))* asteroid.getSpeed();
+            double changeY = Math.sin(Math.toRadians(asteroid.getRotation()))* asteroid.getSpeed();
 
-            asteroid.setX(asteroid.getX() + changeX * 0.5);
-            asteroid.setY(asteroid.getY() + changeY * 0.5);
+            asteroid.setX(asteroid.getX() + changeX); //*0.5 for the speed of the asteroid: changeX * 0.5
+            asteroid.setY(asteroid.getY() + changeY); //*0.5 for the speed of the asteroid: changeY * 0.5
 
             if (asteroid.getX() < 0) {
                 asteroid.setX(asteroid.getX() - gameData.getDisplayWidth());

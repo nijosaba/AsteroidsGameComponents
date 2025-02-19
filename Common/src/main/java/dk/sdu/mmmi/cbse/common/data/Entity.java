@@ -12,7 +12,7 @@ public class Entity implements Serializable {
     private double y;
     private double rotation;
     private float radius;
-
+    private double speed;
 
     public String getID() {
         return ID.toString();
@@ -59,5 +59,13 @@ public class Entity implements Serializable {
 
     public float getRadius() {
         return this.radius;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    public double getSpeed() {
+        return this.speed;
     }
 }
