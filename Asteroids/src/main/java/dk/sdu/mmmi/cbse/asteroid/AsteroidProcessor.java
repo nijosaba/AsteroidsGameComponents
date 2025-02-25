@@ -21,6 +21,7 @@ public class AsteroidProcessor implements IEntityProcessingService { //movement 
             asteroid.setX(asteroid.getX() + changeX); //*0.5 for the speed of the asteroid: changeX * 0.5
             asteroid.setY(asteroid.getY() + changeY); //*0.5 for the speed of the asteroid: changeY * 0.5
 
+            // Wrap around screen, dvs ingen collision, men kommer ud på anden side af skærmen
             if (asteroid.getX() < 0) {
                 asteroid.setX(asteroid.getX() - gameData.getDisplayWidth());
             }

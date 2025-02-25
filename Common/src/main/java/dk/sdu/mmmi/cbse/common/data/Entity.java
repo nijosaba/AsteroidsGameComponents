@@ -12,7 +12,9 @@ public class Entity implements Serializable {
     private double y;
     private double rotation;
     private float radius;
-    private double speed;
+    private double speed; //til asteroids
+    private long lastShotTime = 0; // til player
+    private int healthPoint = 1; // specifikt til asteroid, kig i player og enemy klasssen
 
     public String getID() {
         return ID.toString();
@@ -67,5 +69,20 @@ public class Entity implements Serializable {
 
     public double getSpeed() {
         return this.speed;
+    }
+    public long getLastShotTime() {
+        return lastShotTime;
+    }
+
+    public void setLastShotTime(long lastShotTime) {
+        this.lastShotTime = lastShotTime;
+    }
+
+    public int getHealthPoint() {
+        return healthPoint;
+    }
+
+    public void setHealthPoint(int healthPoint) {
+        this.healthPoint = healthPoint;
     }
 }

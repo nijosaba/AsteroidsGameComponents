@@ -10,16 +10,20 @@ import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
 import java.util.Collection;
 import java.util.ServiceLoader;
-
 import static java.util.stream.Collectors.toList;
 
 
 public class PlayerControlSystem implements IEntityProcessingService {
 
+
+    private static long SHOOTING_COOLDOWN = 600; //cooldown i milisecundus
+
     @Override
     public void process(GameData gameData, World world) {
             
         for (Entity player : world.getEntities(Player.class)) {
+
+
             if (gameData.getKeys().isDown(GameKeys.LEFT)) {
                 player.setRotation(player.getRotation() - 5);                
             }
@@ -32,12 +36,16 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 player.setX(player.getX() + changeX);
                 player.setY(player.getY() + changeY);
             }
-            if(gameData.getKeys().isDown(GameKeys.SPACE)) {                
-                getBulletSPIs().stream().findFirst().ifPresent(
-                        spi -> {world.addEntity(spi.createBullet(player, gameData));}
-                );
+            if (gameData.getKeys().isDown(GameKeys.SPACE)) { //skyde
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - player.getLastShotTime()>= SHOOTING_COOLDOWN) {
+                    getBulletSPIs().stream().findFirst().ifPresent(
+                            spi -> world.addEntity(spi.createBullet(player, gameData))
+                    );
+                    player.setLastShotTime(currentTime);
+                }
             }
-            
+            //collision detection ?
         if (player.getX() < 0) {
             player.setX(1);
         }
@@ -54,7 +62,6 @@ public class PlayerControlSystem implements IEntityProcessingService {
             player.setY(gameData.getDisplayHeight()-1);
         }
 
-                                        
         }
     }
 

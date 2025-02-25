@@ -23,8 +23,8 @@ public class EnemyControlSystem implements IEntityProcessingService {
     public void process(GameData gameData, World world) {
         for (Entity enemy : world.getEntities(Enemy.class)) {
             // Tilfældigt ændre retning
-            if (random.nextFloat() < 0.02) { // 2% chance for at ændre retning hvert tick
-                enemy.setRotation(random.nextInt(360));
+            if (random.nextFloat() < 0.01) { // 1% chance for at ændre retning hvert tick
+                enemy.setRotation(random.nextInt(360)); //maximale værdi for tilfældig rotation(250 grader)
             }
 
             // Bevæge sig fremad
@@ -41,6 +41,7 @@ public class EnemyControlSystem implements IEntityProcessingService {
             }
 
             // Skærmkant-teleportering (wrap around)
+            // Wrap around screen, dvs ingen collision, men kommer ud på anden side af skærmen
             if (enemy.getX() < 0) enemy.setX(gameData.getDisplayWidth());
             if (enemy.getX() > gameData.getDisplayWidth()) enemy.setX(0);
             if (enemy.getY() < 0) enemy.setY(gameData.getDisplayHeight());
