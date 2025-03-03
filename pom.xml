@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>dk.sdu.mmmi.cbse</groupId>
+    <groupId>dk.sdu.cbse</groupId>
     <artifactId>asteroids.jpms</artifactId>
     <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -14,16 +14,15 @@
         <module>Core</module>
         <module>Common</module>
         <module>Player</module>
-
-
     </modules>
+
     <properties>
         <java>java</java>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>        
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.9</maven.compiler.source>
         <maven.compiler.target>1.9</maven.compiler.target>
     </properties>
-    
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -41,9 +40,9 @@
                 <artifactId>javafx-base</artifactId>
                 <version>21.0.2</version>
             </dependency>
-            
         </dependencies>
-    </dependencyManagement>    
+    </dependencyManagement>
+
     <build>
         <plugins>
             <plugin>
@@ -75,23 +74,16 @@
                     <workingDirectory>.</workingDirectory>
                     <longModulepath>false</longModulepath>
                     <arguments>
-                        <!--                        
+                        <!--
                                                 On Mac Devices this line should not be commented out
                                                 <argument>-XstartOnFirstThread</argument>
                         -->
-                        <!--argument>-Dorg.lwjgl.util.Debug=true</argument-->
                         <argument>-Djava.library.path=libs</argument>
                         <argument>--module-path=mods-mvn</argument>
                         <argument>--class-path=libs/*</argument>
-                        <!-- because spark.core is an automatic module and actually required,
-                        monitor.observer.zero would be resolved as well and does not need
-                        to be added explicitly;
-                        I still wanted to do it for clarity, but for some reason that results
-                        in "java.lang.module.FindException: Module monitor.observer.zero not found";
-                        strange... -->
-                        <!--argument>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=127.0.0.1:8000</argument-->
-                        <argument>--module=Core/dk.sdu.mmmi.core.Main</argument>
-                        <argument>--add-modules javafx.graphics</argument>
+
+                        <argument>--module=Core/dk.sdu.cbse.core.Main</argument>
+                        <argument>--add-modules=javafx.graphics,Player</argument>
                     </arguments>
                 </configuration>
             </plugin>

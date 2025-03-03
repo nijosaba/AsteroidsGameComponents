@@ -3,7 +3,7 @@ package dk.sdu.cbse.common.data;
 import java.io.Serializable;
 import java.util.UUID;
 
-public class Entity implements Serializable {
+public class Entities implements Serializable {
 
     private final UUID ID = UUID.randomUUID();
 
@@ -12,9 +12,9 @@ public class Entity implements Serializable {
     private double y;
     private double rotation;
     private float radius;
-    private double speed; //til asteroids
+    private double speed; // for nu, kun til asteroid
     private long lastShotTime = 0; // til player
-    private int healthPoint = 1; // specifikt til asteroid, kig i player og enemy klasssen
+    private int healthPoint = 1; // alt andet end player og enemy har 1 hp
 
     public String getID() {
         return ID.toString();

@@ -12,28 +12,28 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class World {
 
-    private final Map<String, Entity> entityMap = new ConcurrentHashMap<>();
+    private final Map<String, Entities> entityMap = new ConcurrentHashMap<>();
 
-    public String addEntity(Entity entity) {
-        entityMap.put(entity.getID(), entity);
-        return entity.getID();
+    public String addEntity(Entities entities) {
+        entityMap.put(entities.getID(), entities);
+        return entities.getID();
     }
 
     public void removeEntity(String entityID) {
         entityMap.remove(entityID);
     }
 
-    public void removeEntity(Entity entity) {
-        entityMap.remove(entity.getID());
+    public void removeEntity(Entities entities) {
+        entityMap.remove(entities.getID());
     }
 
-    public Collection<Entity> getEntities() {
+    public Collection<Entities> getEntities() {
         return entityMap.values();
     }
 
-    public <E extends Entity> List<Entity> getEntities(Class<E>... entityTypes) {
-        List<Entity> r = new ArrayList<>();
-        for (Entity e : getEntities()) {
+    public <E extends Entities> List<Entities> getEntities(Class<E>... entityTypes) {
+        List<Entities> r = new ArrayList<>();
+        for (Entities e : getEntities()) {
             for (Class<E> entityType : entityTypes) {
                 if (entityType.equals(e.getClass())) {
                     r.add(e);
@@ -43,7 +43,7 @@ public class World {
         return r;
     }
 
-    public Entity getEntity(String ID) {
+    public Entities getEntity(String ID) {
         return entityMap.get(ID);
     }
 
