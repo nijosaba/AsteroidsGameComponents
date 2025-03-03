@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.cbse.main;
+package dk.sdu.cbse.core;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
