@@ -3,6 +3,6 @@ package dk.sdu.cbse.bullet.system;
 import dk.sdu.cbse.common.data.Entities;
 import dk.sdu.cbse.common.data.GameData;
 
-public interface BulletSPI {
+public interface IBullet {
     Entities createBullet(Entities bullet, GameData gameData);
 }

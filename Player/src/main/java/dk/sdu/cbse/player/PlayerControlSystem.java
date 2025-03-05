@@ -1,7 +1,6 @@
 package dk.sdu.cbse.player;
 
-import dk.sdu.cbse.bullet.system.Bullet;
-import dk.sdu.cbse.bullet.system.BulletSPI;
+import dk.sdu.cbse.bullet.system.IBullet;
 import dk.sdu.cbse.common.data.Entities;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.GameKeys;
@@ -79,7 +78,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     long currentTime = System.currentTimeMillis();
                     if (currentTime - player.getLastShotTime() >= SHOOTING_COOLDOWN) {
                         System.out.println("Attempting to fire bullet");
-                        Collection<? extends BulletSPI> services = getBulletSPIs();
+                        Collection<? extends IBullet> services = getBulletSPIs();
                         System.out.println("Found " + services.size() + " bullet services");
                         services.stream().findFirst().ifPresent(
                                 spi -> world.addEntity(spi.createBullet(player, gameData))
@@ -90,8 +89,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
             }
         }
     }
-    private Collection<? extends BulletSPI> getBulletSPIs() {
-        return ServiceLoader.load(BulletSPI.class).stream()
+    private Collection<? extends IBullet> getBulletSPIs() {
+        return ServiceLoader.load(IBullet.class).stream()
                 .map(ServiceLoader.Provider::get)
                 .collect(Collectors.toList());
     }

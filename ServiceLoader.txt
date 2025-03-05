@@ -37,9 +37,12 @@ for (MessageService service : loader) {
     service.sendMessage("Hej fra ServiceLoader!");
 } // i en klasse fra AppModule kan man nu finde og bruge servicen dynamisk
 
-så modulet emailmodule indholder interfacet messageservice og emailservice og modulet viser at det provider interfacet
+så modulet emailmodule indholder interfacet messageservice og klassen emailservice og modulet viser at det provider interfacet
 messageservice og bruger klassen emailservice
 
 Interfacet (MessageService) → Definerer, hvad en beskedservice skal kunne.
 Implementeringen (EmailService) → En konkret klasse, der sender beskeder via e-mail.
 provides MessageService with EmailService; → Fortæller Java, at EmailService er en implementation af MessageService.
+
+
+SPI = SERVICE PROVIDER INTERFACE, som i eksemplet netop er det MessageService er

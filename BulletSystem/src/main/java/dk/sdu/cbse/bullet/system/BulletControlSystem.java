@@ -5,7 +5,7 @@ import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 
-public class BulletControlSystem implements IEntityProcessingService, BulletSPI {
+public class BulletControlSystem implements IEntityProcessingService, IBullet {
 
 
     private void moveBullet (Bullet bullet) {
