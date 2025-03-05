@@ -70,6 +70,7 @@ public class Entities implements Serializable {
     public double getSpeed() {
         return this.speed;
     }
+
     public long getLastShotTime() {
         return lastShotTime;
     }

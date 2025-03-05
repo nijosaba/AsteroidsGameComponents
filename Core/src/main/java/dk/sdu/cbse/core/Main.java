@@ -28,8 +28,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        System.out.println("JavaFX Application starting...");
-
         // Configure game window
         gameWindow.setPrefSize(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         gameWindow.setStyle("-fx-background-color: black;");
@@ -48,7 +46,6 @@ public class Main extends Application {
 
         // Create polygons for all entities
         for (Entities entity : world.getEntities()) {
-            System.out.println("Creating initial polygon for: " + entity.getClass().getName());
             Polygon polygon = new Polygon(entity.getPolygonCoordinates());
             polygon.setStroke(Color.LIME); // Bright color against black
             polygon.setFill(Color.TRANSPARENT);
@@ -67,9 +64,7 @@ public class Main extends Application {
         debugCenter.setTranslateY(gameData.getDisplayHeight()/2);
         gameWindow.getChildren().add(debugCenter);
 
-        System.out.println("About to show stage...");
         stage.show();
-        System.out.println("Stage shown");
     }
 
     private void setupInput(Scene scene) {
@@ -105,25 +100,13 @@ public class Main extends Application {
     }
 
     private void loadPlugins() {
-        System.out.println("Loading game plugins...");
         ServiceLoader<IGamePluginService> plugins = ServiceLoader.load(IGamePluginService.class);
         int count = 0;
-
         for (IGamePluginService plugin : plugins) {
             count++;
-            System.out.println("Starting plugin: " + plugin.getClass().getName());
             plugin.start(gameData, world);
         }
 
-        System.out.println("Loaded " + count + " plugins");
-        System.out.println("World now has " + world.getEntities().size() + " entities");
-
-        // Print details of each entity for debugging
-        for (Entities entity : world.getEntities()) {
-            System.out.println("Entity: " + entity.getClass().getName() +
-                    " at position (" + entity.getX() + "," + entity.getY() + ")");
-            System.out.println("Polygon coords: " + java.util.Arrays.toString(entity.getPolygonCoordinates()));
-        }
     }
 
     private void setupGameLoop() {
@@ -132,18 +115,15 @@ public class Main extends Application {
             public void handle(long now) {
                 // Update game state
                 gameData.getKeys().update();
-
                 // Process entities
                 for (IEntityProcessingService processor : ServiceLoader.load(IEntityProcessingService.class)) {
                     processor.process(gameData, world);
                 }
-
                 // Process post-entity services
                 for (IPostEntityProcessingService postProcessor :
                         ServiceLoader.load(IPostEntityProcessingService.class)) {
                     postProcessor.process(gameData, world);
                 }
-
                 // Update visual representation
                 updateVisuals();
             }

@@ -9,6 +9,7 @@ public class PlayerPlugin implements IGamePluginService {
 
     private Entities player;
 
+
     private Entities createPlayerShip(GameData gameData) {
         Player playerShip = new Player();
         playerShip.setPolygonCoordinates(-5, -5, 10, 0, -5, 5);
@@ -16,12 +17,9 @@ public class PlayerPlugin implements IGamePluginService {
         playerShip.setY(gameData.getDisplayHeight() / 4);
         playerShip.setRadius(8);
 
-        playerShip.setMaxSpeed(200);
-        playerShip.setAcceleration(10);
-        playerShip.setDeceleration(5);
-        playerShip.setLife(3);
+        playerShip.setHealthPoint(3);
 
-        return playerShip;
+        return playerShip; //return pga vi skal bruge playerShip i start metoden med setters værdier.
 
     }
 
@@ -35,6 +33,6 @@ public class PlayerPlugin implements IGamePluginService {
     @Override
     public void stop(GameData gameData, World world) {
         world.removeEntity(player);
-
     }
+
 }

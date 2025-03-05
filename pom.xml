@@ -15,6 +15,7 @@
         <module>Common</module>
         <module>Player</module>
         <module>BulletSystem</module>
+        <module>Enemy</module>
     </modules>
 
     <properties>

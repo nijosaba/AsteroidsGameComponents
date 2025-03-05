@@ -32,12 +32,12 @@ public class PlayerControlSystem implements IEntityProcessingService {
             double radians = Math.toRadians(player.getRotation());
 
             // Calculate acceleration vector
-            float dx = (float) Math.cos(radians);
-            float dy = (float) Math.sin(radians);
+            float changeX = (float) Math.cos(radians);
+            float changeY = (float) Math.sin(radians);
 
             // Apply acceleration
-            player.setX(player.getX() + dx);
-            player.setY(player.getY() + dy);
+            player.setX(player.getX() + changeX); //speed = 1unit per frame
+            player.setY(player.getY() + changeY);
         }
     }
 
