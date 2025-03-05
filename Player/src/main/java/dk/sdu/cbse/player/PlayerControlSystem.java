@@ -77,9 +77,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 if (gameData.getKeys().isDown(GameKeys.SPACE)) {
                     long currentTime = System.currentTimeMillis();
                     if (currentTime - player.getLastShotTime() >= SHOOTING_COOLDOWN) {
-                        System.out.println("Attempting to fire bullet");
                         Collection<? extends IBullet> services = getBulletSPIs();
-                        System.out.println("Found " + services.size() + " bullet services");
                         services.stream().findFirst().ifPresent(
                                 spi -> world.addEntity(spi.createBullet(player, gameData))
                         );

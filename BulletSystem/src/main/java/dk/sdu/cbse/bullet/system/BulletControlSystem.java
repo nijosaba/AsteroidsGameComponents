@@ -19,6 +19,7 @@ public class BulletControlSystem implements IEntityProcessingService, IBullet {
 
     }
 
+    /*
     private void wrapPosition(Bullet bullet, GameData gameData) {
         double x = bullet.getX();
         double y = bullet.getY();
@@ -39,6 +40,8 @@ public class BulletControlSystem implements IEntityProcessingService, IBullet {
         }
     }
 
+     */
+
 
     @Override
     public void process(GameData gameData, World world) {
@@ -46,7 +49,7 @@ public class BulletControlSystem implements IEntityProcessingService, IBullet {
             if (entity instanceof Bullet) {
                 Bullet bullet = (Bullet) entity;
                 moveBullet(bullet);
-                wrapPosition(bullet, gameData);
+                //wrapPosition(bullet, gameData);
             }
         }
     }
