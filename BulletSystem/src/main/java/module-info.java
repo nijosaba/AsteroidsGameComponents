@@ -6,6 +6,6 @@ module BulletSystem {
             with dk.sdu.cbse.bullet.system.BulletControlSystem;
     provides dk.sdu.cbse.common.services.IGamePluginService
             with dk.sdu.cbse.bullet.system.BulletPlugin;
-    provides dk.sdu.cbse.bullet.system.IBullet
+    provides dk.sdu.cbse.bullet.system.IBulletSPI
             with dk.sdu.cbse.bullet.system.BulletControlSystem;
 }

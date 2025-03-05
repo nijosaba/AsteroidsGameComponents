@@ -5,10 +5,10 @@ import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 
-public class BulletControlSystem implements IEntityProcessingService, IBullet {
+public class BulletControlSystem implements IEntityProcessingService, IBulletSPI {
 
 
-    private void moveBullet (Bullet bullet) {
+    private void moveBullet (Bullet bullet) { //opdatere bullet position i gameloopet
 
         double radians = Math.toRadians(bullet.getRotation());
         float dx = (float) Math.cos(radians) *(float) bullet.getSpeed();
@@ -17,6 +17,33 @@ public class BulletControlSystem implements IEntityProcessingService, IBullet {
         bullet.setX(bullet.getX() + dx);
         bullet.setY(bullet.getY() + dy);
 
+    }
+
+    @Override
+    public void process(GameData gameData, World world) {
+        for (Entities entity : world.getEntities()) {
+            if (entity instanceof Bullet) {
+                Bullet bullet = (Bullet) entity;
+                moveBullet(bullet);
+                //wrapPosition(bullet, gameData);
+            }
+        }
+    }
+
+    @Override
+    public Entities createBullet(Entities shooter, GameData gameData) { //initializere ny bullet via SPI(serviceproviderinterface mechanisme)
+        Bullet bullet = new Bullet();
+
+        // Use shooter's position and rotation
+        double radians = Math.toRadians(shooter.getRotation());
+        double offsetX = Math.cos(radians) * shooter.getRadius();
+        double offsetY = Math.sin(radians) * shooter.getRadius();
+
+        bullet.setX(shooter.getX() + offsetX);
+        bullet.setY(shooter.getY() + offsetY);
+        bullet.setRotation(shooter.getRotation());
+
+        return bullet;
     }
 
     /*
@@ -41,32 +68,4 @@ public class BulletControlSystem implements IEntityProcessingService, IBullet {
     }
 
      */
-
-
-    @Override
-    public void process(GameData gameData, World world) {
-        for (Entities entity : world.getEntities()) {
-            if (entity instanceof Bullet) {
-                Bullet bullet = (Bullet) entity;
-                moveBullet(bullet);
-                //wrapPosition(bullet, gameData);
-            }
-        }
-    }
-
-    @Override
-    public Entities createBullet(Entities shooter, GameData gameData) {
-        Bullet bullet = new Bullet();
-
-        // Use shooter's position and rotation
-        double radians = Math.toRadians(shooter.getRotation());
-        double offsetX = Math.cos(radians) * shooter.getRadius();
-        double offsetY = Math.sin(radians) * shooter.getRadius();
-
-        bullet.setX(shooter.getX() + offsetX);
-        bullet.setY(shooter.getY() + offsetY);
-        bullet.setRotation(shooter.getRotation());
-
-        return bullet;
-    }
 }

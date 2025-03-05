@@ -1,6 +1,6 @@
 package dk.sdu.cbse.player;
 
-import dk.sdu.cbse.bullet.system.IBullet;
+import dk.sdu.cbse.bullet.system.IBulletSPI;
 import dk.sdu.cbse.common.data.Entities;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.GameKeys;
@@ -77,7 +77,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 if (gameData.getKeys().isDown(GameKeys.SPACE)) {
                     long currentTime = System.currentTimeMillis();
                     if (currentTime - player.getLastShotTime() >= SHOOTING_COOLDOWN) {
-                        Collection<? extends IBullet> services = getBulletSPIs();
+                        Collection<? extends IBulletSPI> services = getBulletSPIs();
                         services.stream().findFirst().ifPresent(
                                 spi -> world.addEntity(spi.createBullet(player, gameData))
                         );
@@ -87,8 +87,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
             }
         }
     }
-    private Collection<? extends IBullet> getBulletSPIs() {
-        return ServiceLoader.load(IBullet.class).stream()
+    private Collection<? extends IBulletSPI> getBulletSPIs() {
+        return ServiceLoader.load(IBulletSPI.class).stream()
                 .map(ServiceLoader.Provider::get)
                 .collect(Collectors.toList());
     }

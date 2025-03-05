@@ -2,6 +2,11 @@ ServiceLoader Requirements: ServiceLoader needs both:
 A provider module that declares provides SomeInterface with SomeImplementation
 A consumer module that declares uses SomeInterface
 
+The beauty of ServiceLoader is that it creates a "plug-in" architecture where:
+Implementation modules can be added/removed without changing consumer code
+Multiple implementations can exist and be discovered at runtime
+Modules stay loosely coupled, only sharing the interface contract
+
 I stedet for at hardcorde, hvilken klasse der skal bruges, kan ServiceLoader finde den rigtige implementation automatisk.
 
 Et interface definerer en service (f.eks. IEntityProcessingService).
@@ -45,4 +50,10 @@ Implementeringen (EmailService) → En konkret klasse, der sender beskeder via e
 provides MessageService with EmailService; → Fortæller Java, at EmailService er en implementation af MessageService.
 
 
-SPI = SERVICE PROVIDER INTERFACE, som i eksemplet netop er det MessageService er
+💡SPI = SERVICE PROVIDER INTERFACE, som i eksemplet netop er det MessageService er
+
+SPI er altså når et modul skal bruges af et andet modul, og common er bare for at spillet fungere.
+Fx bullets skal bruges af et andet modul Player, så bullets er SPI og Player har brug for common, som er det der bygger verdenen
+💡 Common → Indeholder SPI'er og fælles kode
+💡 Player, Enemy, Asteroid osv. → Implementerer SPI'er og registrerer sig selv med provides
+Så SPI'et er det, som moduler implementerer for at kunne arbejde sammen, mens Common er noget, hele spillet har brug for. 🚀

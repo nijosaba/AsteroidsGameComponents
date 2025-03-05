@@ -1,4 +1,4 @@
-import dk.sdu.cbse.bullet.system.IBullet;
+import dk.sdu.cbse.bullet.system.IBulletSPI;
 
 module Player {
     requires BulletSystem;
@@ -10,7 +10,7 @@ module Player {
     provides dk.sdu.cbse.common.services.IGamePluginService
             with dk.sdu.cbse.player.PlayerPlugin;
 
-    uses IBullet;
+    uses IBulletSPI;
 }
 //provides eks: dk.sdu.cbse.player.PlayerPlugin tilbyder en implementering af IGamePluginService
 //provides gør at andre moduler kan bruge denne service, og with gør at det er denne klasse der implementerer servicen
