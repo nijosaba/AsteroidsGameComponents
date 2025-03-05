@@ -1,13 +1,20 @@
 package dk.sdu.cbse.player;
 
+import dk.sdu.cbse.bullet.system.Bullet;
+import dk.sdu.cbse.bullet.system.BulletSPI;
 import dk.sdu.cbse.common.data.Entities;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.GameKeys;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 
+import java.util.Collection;
+import java.util.ServiceLoader;
+import java.util.stream.Collectors;
+
 public class PlayerControlSystem implements IEntityProcessingService {
 
+    private static final long SHOOTING_COOLDOWN = 300; // milliseconds
 
     private void handleMovement(Player player, GameData gameData) {
         GameKeys keys = gameData.getKeys();
@@ -59,7 +66,6 @@ public class PlayerControlSystem implements IEntityProcessingService {
         }
     }
 
-    @Override
     public void process(GameData gameData, World world) {
         for (Entities entity : world.getEntities()) {
             if (entity instanceof Player) {
@@ -67,7 +73,26 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 handleMovement(player, gameData);
                 updateShape(player);
                 wrapPosition(player, gameData);
+
+                // Change to isDown with cooldown
+                if (gameData.getKeys().isDown(GameKeys.SPACE)) {
+                    long currentTime = System.currentTimeMillis();
+                    if (currentTime - player.getLastShotTime() >= SHOOTING_COOLDOWN) {
+                        System.out.println("Attempting to fire bullet");
+                        Collection<? extends BulletSPI> services = getBulletSPIs();
+                        System.out.println("Found " + services.size() + " bullet services");
+                        services.stream().findFirst().ifPresent(
+                                spi -> world.addEntity(spi.createBullet(player, gameData))
+                        );
+                        player.setLastShotTime(currentTime);
+                    }
+                }
             }
         }
+    }
+    private Collection<? extends BulletSPI> getBulletSPIs() {
+        return ServiceLoader.load(BulletSPI.class).stream()
+                .map(ServiceLoader.Provider::get)
+                .collect(Collectors.toList());
     }
 }

@@ -1,0 +1,45 @@
+ServiceLoader Requirements: ServiceLoader needs both:
+A provider module that declares provides SomeInterface with SomeImplementation
+A consumer module that declares uses SomeInterface
+
+I stedet for at hardcorde, hvilken klasse der skal bruges, kan ServiceLoader finde den rigtige implementation automatisk.
+
+Et interface definerer en service (f.eks. IEntityProcessingService).
+Et modul tilbyder en implementation med provides ... with ....
+Et andet modul angiver, at det har brug for servicen med uses.
+ServiceLoader finder og bruger den rigtige implementation ved runtime.
+
+Plugins og udvidelser → Man kan tilføje nye implementeringer uden at ændre koden.
+Dynamisk opdagelse → Finder implementationer automatisk ved runtime.
+Tænk på ServiceLoader som en automatisk "find og brug den rigtige klasse"-mekanisme.
+
+eksempel:
+
+public interface MessageService {
+    void sendMessage(String message);
+}
+
+public class EmailService implements MessageService {
+    public void sendMessage(String message) {
+        System.out.println("Sender e-mail: " + message);
+    }
+}
+module EmailModule {
+    provides MessageService with EmailService;
+}
+
+module AppModule { //dette modul kan nu use MessageService
+    uses MessageService;
+}
+
+ServiceLoader<MessageService> loader = ServiceLoader.load(MessageService.class);
+for (MessageService service : loader) {
+    service.sendMessage("Hej fra ServiceLoader!");
+} // i en klasse fra AppModule kan man nu finde og bruge servicen dynamisk
+
+så modulet emailmodule indholder interfacet messageservice og emailservice og modulet viser at det provider interfacet
+messageservice og bruger klassen emailservice
+
+Interfacet (MessageService) → Definerer, hvad en beskedservice skal kunne.
+Implementeringen (EmailService) → En konkret klasse, der sender beskeder via e-mail.
+provides MessageService with EmailService; → Fortæller Java, at EmailService er en implementation af MessageService.

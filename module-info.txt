@@ -1,0 +1,11 @@
+requires	Importerer et andet modul.
+
+exports	Gør en pakke tilgængelig for andre moduler.
+
+provides ... with ... er som at sige:
+"Jeg (modulet) tilbyder en stikprop (implementering) til en bestemt type stikkontakt (interface)."
+
+uses er som at sige:
+"Jeg (modulet) har brug for en stikkontakt, men jeg ved ikke hvem der leverer den."
+
+

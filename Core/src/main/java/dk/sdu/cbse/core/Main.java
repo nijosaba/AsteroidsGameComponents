@@ -154,8 +154,7 @@ public class Main extends Application {
         // Remove entities that are no longer in the world
         polygons.keySet().removeIf(entity -> {
             if (!world.getEntities().contains(entity)) {
-                Polygon polygon = polygons.get(entity);
-                gameWindow.getChildren().remove(polygon);
+                gameWindow.getChildren().remove(polygons.get(entity));
                 return true;
             }
             return false;
@@ -165,14 +164,22 @@ public class Main extends Application {
         for (Entities entity : world.getEntities()) {
             Polygon polygon = polygons.get(entity);
             if (polygon == null) {
-                System.out.println("Creating new polygon for: " + entity.getClass().getName());
                 polygon = new Polygon(entity.getPolygonCoordinates());
-                polygon.setStroke(Color.LIME); // Bright color against black
+
+                // Special styling for bullets
+                if (entity.getClass().getName().contains("Bullet")) {
+                    polygon.setStroke(Color.YELLOW);  // Different color for bullets
+                    polygon.setStrokeWidth(3.0);      // Thicker line for bullets
+                } else {
+                    polygon.setStroke(Color.LIME);
+                    polygon.setStrokeWidth(2.0);
+                }
+
                 polygon.setFill(Color.TRANSPARENT);
-                polygon.setStrokeWidth(2.0);
                 polygons.put(entity, polygon);
                 gameWindow.getChildren().add(polygon);
             }
+
             polygon.setTranslateX(entity.getX());
             polygon.setTranslateY(entity.getY());
             polygon.setRotate(entity.getRotation());
