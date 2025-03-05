@@ -36,7 +36,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
             float changeY = (float) Math.sin(radians);
 
             // Apply acceleration
-            player.setX(player.getX() + changeX); //speed = 1unit per frame
+            player.setX(player.getX() + changeX); //speed = 1unit pr frame
             player.setY(player.getY() + changeY);
         }
     }

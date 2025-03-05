@@ -9,15 +9,13 @@ public class PlayerPlugin implements IGamePluginService {
 
     private Entities player;
 
-
     private Entities createPlayerShip(GameData gameData) {
         Player playerShip = new Player();
         playerShip.setPolygonCoordinates(-5, -5, 10, 0, -5, 5);
-        playerShip.setX(gameData.getDisplayWidth() / 4);
+        playerShip.setX(gameData.getDisplayWidth() / 4); //spawnpoint X og Y nedenunder
         playerShip.setY(gameData.getDisplayHeight() / 4);
         playerShip.setRadius(8);
-
-        playerShip.setHealthPoint(3);
+        playerShip.setHealthPoint(3); //standard entity er hp=1
 
         return playerShip; //return pga vi skal bruge playerShip i start metoden med setters værdier.
 
@@ -27,7 +25,6 @@ public class PlayerPlugin implements IGamePluginService {
     public void start(GameData gameData, World world) {
         player = createPlayerShip(gameData);
         world.addEntity(player);
-        System.out.println("player creaated" + player.getX() + " " + player.getY());
     }
 
     @Override

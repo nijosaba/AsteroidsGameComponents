@@ -11,7 +11,7 @@ public class Entities implements Serializable {
     private double x;
     private double y;
     private double rotation;
-    private float radius;
+    private double radius;
     private double speed; // for nu, kun til asteroid
     private long lastShotTime = 0; // til player
     private int healthPoint = 1; // alt andet end player og enemy har 1 hp
@@ -59,7 +59,7 @@ public class Entities implements Serializable {
         this.radius = radius;
     }
 
-    public float getRadius() {
+    public double getRadius() {
         return this.radius;
     }
 
