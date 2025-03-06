@@ -1,5 +1,6 @@
 package dk.sdu.cbse.core;
 
+import javafx.scene.paint.Color;
 import dk.sdu.cbse.common.data.Entities;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.GameKeys;
@@ -32,38 +33,23 @@ public class Main extends Application {
         gameWindow.setPrefSize(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         gameWindow.setStyle("-fx-background-color: black;");
 
-        // Set up scene
         Scene scene = new Scene(gameWindow);
         stage.setTitle("Asteroid Game");
         stage.setScene(scene);
         stage.setResizable(false);
-
-        // Set up keyboard input
-        setupInput(scene);
-
-        // Start all game plugins
-        loadPlugins();
+        setupInput(scene); //keyboard input
+        loadPlugins();// Start all game plugins
 
         // Create polygons for all entities
         for (Entities entity : world.getEntities()) {
             Polygon polygon = new Polygon(entity.getPolygonCoordinates());
-            polygon.setStroke(Color.LIME); // Bright color against black
+            polygon.setStroke(entity.getColor());
             polygon.setFill(Color.TRANSPARENT);
             polygon.setStrokeWidth(2.0);
             polygons.put(entity, polygon);
             gameWindow.getChildren().add(polygon);
         }
-
-        // Set up game loop
         setupGameLoop();
-
-        // Draw a debug reference point in the center
-        Polygon debugCenter = new Polygon(0,0, 5,0, 5,5, 0,5);
-        debugCenter.setFill(Color.RED);
-        debugCenter.setTranslateX(gameData.getDisplayWidth()/2);
-        debugCenter.setTranslateY(gameData.getDisplayHeight()/2);
-        gameWindow.getChildren().add(debugCenter);
-
         stage.show();
     }
 
@@ -145,21 +131,15 @@ public class Main extends Application {
             Polygon polygon = polygons.get(entity);
             if (polygon == null) {
                 polygon = new Polygon(entity.getPolygonCoordinates());
-
-                // Special styling for bullets
-                if (entity.getClass().getName().contains("Bullet")) {
-                    polygon.setStroke(Color.YELLOW);  // Different color for bullets
-                    polygon.setStrokeWidth(3.0);      // Thicker line for bullets
-                } else {
-                    polygon.setStroke(Color.LIME);
-                    polygon.setStrokeWidth(2.0);
-                }
-
+                polygon.setStroke(entity.getColor());
+                polygon.setStrokeWidth(2.0);
                 polygon.setFill(Color.TRANSPARENT);
                 polygons.put(entity, polygon);
                 gameWindow.getChildren().add(polygon);
             }
 
+            // Update existing polygon properties
+            polygon.setStroke(entity.getColor());
             polygon.setTranslateX(entity.getX());
             polygon.setTranslateY(entity.getY());
             polygon.setRotate(entity.getRotation());

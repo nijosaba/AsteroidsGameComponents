@@ -3,6 +3,7 @@ import dk.sdu.cbse.bullet.system.IBulletSPI;
 module Player {
     requires BulletSystem;
     requires Common;
+    requires javafx.graphics;
     exports dk.sdu.cbse.player;
 
     provides dk.sdu.cbse.common.services.IEntityProcessingService

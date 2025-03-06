@@ -1,7 +1,9 @@
 package dk.sdu.cbse.common.data;
 
+
 import java.io.Serializable;
 import java.util.UUID;
+import javafx.scene.paint.Color;
 
 public class Entities implements Serializable {
 
@@ -14,7 +16,8 @@ public class Entities implements Serializable {
     private double radius;
     private double speed; // for nu, kun til asteroid
     private long lastShotTime = 0; // til player
-    private int healthPoint = 1; // alt andet end player og enemy har 1 hp
+    private int healthPoint = 1; // default hp
+    private Color color = Color.WHITE;
 
     public String getID() {
         return ID.toString();
@@ -85,5 +88,13 @@ public class Entities implements Serializable {
 
     public void setHealthPoint(int healthPoint) {
         this.healthPoint = healthPoint;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

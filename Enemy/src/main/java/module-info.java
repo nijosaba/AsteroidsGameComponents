@@ -4,6 +4,7 @@ module Enemy {
 
     requires Common;
     requires BulletSystem;
+    requires javafx.graphics;
     exports dk.sdu.cbse.enemy;
 
     provides dk.sdu.cbse.common.services.IEntityProcessingService with dk.sdu.cbse.enemy.EnemyControlSystem;

@@ -1,5 +1,6 @@
 module BulletSystem {
     requires Common;
+    requires javafx.graphics;
     exports dk.sdu.cbse.bullet.system;
 
     provides dk.sdu.cbse.common.services.IEntityProcessingService
