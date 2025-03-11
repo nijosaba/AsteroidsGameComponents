@@ -26,8 +26,12 @@ public class AsteroidPlugin implements IGamePluginService {
 
     @Override
     public void start(GameData gameData, World world) {
-        asteroids = createAsteroid(gameData);
-        world.addEntity(asteroids);
+        Entities tempAsteroid = new Asteroid(gameData);
+        int spawnCount = tempAsteroid.getSpawnCount();
+        for (int i = 0; i < spawnCount; i++) {
+            asteroids = createAsteroid(gameData);
+            world.addEntity(asteroids);
+        }
 
     }
 

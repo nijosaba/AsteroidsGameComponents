@@ -11,13 +11,16 @@ public class AsteroidControlSystem implements IEntityProcessingService {
 
     private Random random = new Random();
 
+
     @Override
     public void process(GameData gameData, World world) {
+
+
         for (Entities entities : world.getEntities(Asteroid.class)) {
             if (entities instanceof Asteroid) {
                 Asteroid asteroid = (Asteroid) entities;
 
-                if (asteroid.getRotation() == 0 ) {
+                if (asteroid.getRotation() == 0) {
                     asteroid.setRotation(random.nextInt(360));
                 }
 
@@ -26,11 +29,16 @@ public class AsteroidControlSystem implements IEntityProcessingService {
                 double changeY = Math.sin(Math.toRadians(asteroid.getRotation()));
                 asteroid.setX(asteroid.getX() + changeX * asteroid.getSpeed());
                 asteroid.setY(asteroid.getY() + changeY * asteroid.getSpeed());
+
                 // Wrap around screen
-               asteroid.wrapAroundScreen(asteroid, gameData);
+                asteroid.wrapAroundScreen(asteroid, gameData);
+
+
             }
         }
     }
+
+
 
 
 }

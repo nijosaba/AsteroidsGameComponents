@@ -22,7 +22,7 @@ public class Entities implements Serializable {
     private Random random = new Random();
     private double spawnerX; // skal laves til enemy og asteroid
     private double spawnerY;
-    private double spawnCount;
+    private int spawnCount;
     private boolean isHit = false;
 
 
@@ -138,5 +138,13 @@ public class Entities implements Serializable {
 
     public void setHit(boolean hit) {
         isHit = hit;
+    }
+
+    public int getSpawnCount() {
+        return spawnCount;
+    }
+
+    public void setSpawnCount(int spawnCount) {
+        this.spawnCount = spawnCount;
     }
 }
