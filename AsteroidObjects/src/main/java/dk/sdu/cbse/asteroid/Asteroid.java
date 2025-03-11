@@ -7,15 +7,12 @@ import javafx.scene.paint.Color;
 import java.util.Random;
 
 public class Asteroid extends Entities {
-    private GameData gameData;
-
-    private Random random = new Random();
 
     public Asteroid(GameData gameData) {
-        this.gameData = gameData;
         setColor(Color.MAGENTA);
         spawnAtEdge(gameData); //nødvendigt da asteroider skal skal kendes skærmens dimensioner for at kunne spawne i kanterne
-        setSpeed(random.nextFloat() +0.5 ); // random mellem 0.5 og 1.5
+        Random random = new Random();
+        setSpeed(random.nextFloat() +0.5); // random mellem 0.5 og 1.5
         setSpawnCount(4);
     }
 }
