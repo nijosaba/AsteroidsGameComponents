@@ -11,10 +11,9 @@ public class EnemyPlugin implements IGamePluginService {
 
     private Entities createEnemyShip (GameData gameData) {
         Entities enemyShip = new Enemy();
-        enemyShip.setPolygonCoordinates(-5, -5, 10, 0, -5, 5);
+        enemyShip.setPolygonCoordinates(-5, -5, 10, 0, -5, 5); // trekant første punkt (-5,-5), andet punkt (10,0), tredje punkt (-5,5) = trekant
         enemyShip.setX(gameData.getDisplayWidth() / 4);
         enemyShip.setY(gameData.getDisplayHeight() / 4);
-        enemyShip.setRadius(8);
         enemyShip.setHealthPoint(1);
 
         return enemyShip;

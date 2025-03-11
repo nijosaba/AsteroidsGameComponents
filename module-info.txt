@@ -1,3 +1,8 @@
+In the module-info.java file:
+requires and exports are part of the Java Platform Module System (JPMS).
+provides and uses are part of the ServiceLoader mechanism.
+
+
 requires	Importerer et andet modul.
 
 exports	Gør en pakke tilgængelig for andre moduler.

@@ -36,8 +36,8 @@ public class BulletControlSystem implements IEntityProcessingService, IBulletSPI
 
         // Use shooter's position and rotation
         double radians = Math.toRadians(shooter.getRotation());
-        double offsetX = Math.cos(radians) * shooter.getRadius();
-        double offsetY = Math.sin(radians) * shooter.getRadius();
+        double offsetX = Math.cos(radians);
+        double offsetY = Math.sin(radians);
 
         bullet.setX(shooter.getX() + offsetX);
         bullet.setY(shooter.getY() + offsetY);

@@ -16,6 +16,7 @@
         <module>Player</module>
         <module>BulletSystem</module>
         <module>Enemy</module>
+        <module>AsteroidObjects</module>
     </modules>
 
     <properties>

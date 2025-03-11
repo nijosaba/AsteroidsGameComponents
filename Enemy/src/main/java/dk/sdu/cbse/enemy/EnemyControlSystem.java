@@ -17,7 +17,7 @@ public class EnemyControlSystem implements IEntityProcessingService {
 
     @Override
     public void process(GameData gameData, World world) {
-        for (Entities enemy : world.getEntities(Enemy.class)) {
+        for (Entities enemy : world.getEntities(Enemy.class)) { //Entity Enemy
             if (random.nextFloat() < 0.01) {
                 enemy.setRotation(random.nextFloat() * 360);
             }
@@ -33,10 +33,7 @@ public class EnemyControlSystem implements IEntityProcessingService {
             }
             // Skærmkant-teleportering (wrap around)
             // Wrap around screen, dvs ingen collision, men kommer ud på anden side af skærmen
-            if (enemy.getX() < 0) enemy.setX(gameData.getDisplayWidth());
-            if (enemy.getX() > gameData.getDisplayWidth()) enemy.setX(0);
-            if (enemy.getY() < 0) enemy.setY(gameData.getDisplayHeight());
-            if (enemy.getY() > gameData.getDisplayHeight()) enemy.setY(0);
+            enemy.wrapAroundScreen(enemy, gameData);
         }
 
     }

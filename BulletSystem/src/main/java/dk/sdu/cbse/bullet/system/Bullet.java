@@ -5,9 +5,8 @@ import javafx.scene.paint.Color;
 
 public class Bullet extends Entities {
 public Bullet() {
-    setSpeed(5.0f);
+    setSpeed(5.0f); //usikker på om det virker endnu
     setPolygonCoordinates(-1,-1, 1,-1, 1,1, -1,1);
-    setRadius(5.0f);
     setColor(Color.YELLOW);
 }
 }

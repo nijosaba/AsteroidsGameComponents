@@ -45,33 +45,15 @@ public class PlayerControlSystem implements IEntityProcessingService {
         // Optional: Rotate polygon coordinates if you want to visually update the ship direction
     }
 
-    private void wrapPosition(Player player, GameData gameData) {
-        double x = player.getX();
-        double y = player.getY();
-        int width = gameData.getDisplayWidth();
-        int height = gameData.getDisplayHeight();
 
-        // Wrap around screen edges
-        if (x > width) {
-            player.setX(0);
-        } else if (x < 0) {
-            player.setX(width);
-        }
-
-        if (y > height) {
-            player.setY(0);
-        } else if (y < 0) {
-            player.setY(height);
-        }
-    }
-
+    @Override
     public void process(GameData gameData, World world) {
         for (Entities entity : world.getEntities()) {
             if (entity instanceof Player) {
                 Player player = (Player) entity;
                 handleMovement(player, gameData);
                 updateShape(player);
-                wrapPosition(player, gameData);
+                player.wrapAroundScreen(player, gameData);
 
                 // Change to isDown with cooldown
                 if (gameData.getKeys().isDown(GameKeys.SPACE)) {
