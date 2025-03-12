@@ -49,11 +49,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 Player player = (Player) entity;
                 handleMovement(player, gameData);
                 shootingCooldown(player, gameData, world);
-
                 //player.wrapAroundScreen(player, gameData);
                 player.antiWrapAround(player, gameData);
-
-
             }
         }
 

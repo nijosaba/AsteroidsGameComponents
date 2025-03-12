@@ -19,20 +19,20 @@ public class BulletControlSystem implements IEntityProcessingService, IBulletSPI
 
     }
 
+    private void removeBulletIfOutOfBounds(Bullet bullet, GameData gameData, World world) {
+        if (bullet.getX() < 0 || bullet.getX() > gameData.getDisplayWidth() ||
+                bullet.getY() < 0 || bullet.getY() > gameData.getDisplayHeight()) {
+            world.removeEntity(bullet);
+        }
+    }
+
     @Override
     public void process(GameData gameData, World world) {
         for (Entities entity : world.getEntities()) {
             if (entity instanceof Bullet) {
                 Bullet bullet = (Bullet) entity;
                 moveBullet(bullet);
-
-                //fjerner bullet hvis den er udenfor skærmen
-                if (bullet.getX() < 0 || bullet.getX() > gameData.getDisplayWidth() ||
-                        bullet.getY() < 0 || bullet.getY() > gameData.getDisplayHeight()) {
-                    world.removeEntity(bullet);
-                }
-
-
+                removeBulletIfOutOfBounds(bullet, gameData, world);
             }
         }
     }
@@ -53,26 +53,4 @@ public class BulletControlSystem implements IEntityProcessingService, IBulletSPI
         return bullet;
     }
 
-    /*
-    private void wrapPosition(Bullet bullet, GameData gameData) {
-        double x = bullet.getX();
-        double y = bullet.getY();
-        int width = gameData.getDisplayWidth();
-        int height = gameData.getDisplayHeight();
-
-        // Wrap around screen edges
-        if (x > width) {
-            bullet.setX(0);
-        } else if (x < 0) {
-            bullet.setX(width);
-        }
-
-        if (y > height) {
-            bullet.setY(0);
-        } else if (y < 0) {
-            bullet.setY(height);
-        }
-    }
-
-     */
 }
