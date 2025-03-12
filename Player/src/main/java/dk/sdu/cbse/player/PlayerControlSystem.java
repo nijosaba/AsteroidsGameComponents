@@ -48,21 +48,24 @@ public class PlayerControlSystem implements IEntityProcessingService {
             if (entity instanceof Player) {
                 Player player = (Player) entity;
                 handleMovement(player, gameData);
+                shootingCooldown(player, gameData, world);
 
                 //player.wrapAroundScreen(player, gameData);
                 player.antiWrapAround(player, gameData);
 
-                // Change to isDown with cooldown
-                if (gameData.getKeys().isDown(GameKeys.SPACE)) {
-                    long currentTime = System.currentTimeMillis();
-                    if (currentTime - player.getLastShotTime() >= SHOOTING_COOLDOWN) {
-                        Collection<? extends IBulletSPI> services = getBulletSPIs();
-                        services.stream().findFirst().ifPresent(
-                                spi -> world.addEntity(spi.createBullet(player, gameData))
-                        );
-                        player.setLastShotTime(currentTime);
-                    }
-                }
+
+            }
+        }
+
+    }
+    public void shootingCooldown(Player player, GameData gameData, World world) {
+        if(gameData.getKeys().isDown(GameKeys.SPACE)) {
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - player.getLastShotTime() >= SHOOTING_COOLDOWN) {
+                getBulletSPIs().stream().findFirst().ifPresent(
+                        spi -> world.addEntity(spi.createBullet(player, gameData))
+                );
+                player.setLastShotTime(currentTime);
             }
         }
 
