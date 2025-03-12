@@ -4,6 +4,7 @@ module Player {
     requires BulletSystem;
     requires Common;
     requires javafx.graphics;
+    requires CollisionSystem;
     exports dk.sdu.cbse.player;
 
     provides dk.sdu.cbse.common.services.IEntityProcessingService

@@ -17,6 +17,7 @@
         <module>BulletSystem</module>
         <module>Enemy</module>
         <module>AsteroidObjects</module>
+        <module>CollisionSystem</module>
     </modules>
 
     <properties>

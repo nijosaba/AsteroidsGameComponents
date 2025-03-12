@@ -10,20 +10,21 @@ public class Entities implements Serializable {
 
     private final UUID ID = UUID.randomUUID();
 
+    private Random random = new Random();
+
     private double[] polygonCoordinates;
     private double x;
     private double y;
     private double rotation;
-    private double speed; // for nu, kun til asteroid
-    private long lastShotTime = 0; // til player
-    private int healthPoint = 1; // default hp
+    private double speed;
+    private double radius;
+    private long lastShotTime = 0;
+    private int healthPoint;
     private Color color = Color.WHITE;
 
-    private Random random = new Random();
-    private double spawnerX; // skal laves til enemy og asteroid
-    private double spawnerY;
+
     private int spawnCount;
-    private boolean isHit = false;
+
 
 
     public void wrapAroundScreen(Entities entities, GameData gameData) {
@@ -31,6 +32,12 @@ public class Entities implements Serializable {
         if (entities.getX() > gameData.getDisplayWidth()) entities.setX(0);
         if (entities.getY() < 0) entities.setY(gameData.getDisplayHeight());
         if (entities.getY() > gameData.getDisplayHeight()) entities.setY(0);
+    }
+    public void antiWrapAround (Entities entities, GameData gameData) {
+        if (entities.getX() < 0) entities.setX(0);
+        if (entities.getX() > gameData.getDisplayWidth()) entities.setX(gameData.getDisplayWidth());
+        if (entities.getY() < 0) entities.setY(0);
+        if (entities.getY() > gameData.getDisplayHeight()) entities.setY(gameData.getDisplayHeight());
     }
 
     public String getID() {
@@ -132,19 +139,19 @@ public class Entities implements Serializable {
         this.color = color;
     }
 
-    public boolean isHit() {
-        return isHit;
-    }
-
-    public void setHit(boolean hit) {
-        isHit = hit;
-    }
-
     public int getSpawnCount() {
         return spawnCount;
     }
 
     public void setSpawnCount(int spawnCount) {
         this.spawnCount = spawnCount;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
     }
 }

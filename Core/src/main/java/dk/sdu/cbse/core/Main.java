@@ -1,6 +1,5 @@
 package dk.sdu.cbse.core;
 
-import javafx.scene.paint.Color;
 import dk.sdu.cbse.common.data.Entities;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.GameKeys;
@@ -17,9 +16,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static java.util.stream.Collectors.toList;
 
 public class Main extends Application {
     private final GameData gameData = new GameData();
@@ -38,7 +40,10 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         setupInput(scene); //keyboard input
-        loadPlugins();// Start all game plugins
+
+        for (IGamePluginService iGamePlugin : getPluginServices()) {// Start all game plugins
+            iGamePlugin.start(gameData, world);
+        }
 
         // Create polygons for all entities
         for (Entities entity : world.getEntities()) {
@@ -49,6 +54,7 @@ public class Main extends Application {
             polygons.put(entity, polygon);
             gameWindow.getChildren().add(polygon);
         }
+        //render();
         setupGameLoop();
         stage.show();
     }
@@ -85,15 +91,6 @@ public class Main extends Application {
         });
     }
 
-    private void loadPlugins() {
-        ServiceLoader<IGamePluginService> plugins = ServiceLoader.load(IGamePluginService.class);
-        int count = 0;
-        for (IGamePluginService plugin : plugins) {
-            count++;
-            plugin.start(gameData, world);
-        }
-
-    }
 
     private void setupGameLoop() {
         new AnimationTimer() {
@@ -115,6 +112,30 @@ public class Main extends Application {
             }
         }.start();
     }
+
+
+    //ikke nødvendig da setupgameloop sørger for animationtimer
+    private void render() {
+        new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                update();
+                gameData.getKeys().update();
+            }
+
+        }.start();
+    }
+    //ikke nødvendig uden render metoden
+    private void update() {
+        for (IEntityProcessingService entityProcessorService : getEntityProcessingServices()) {
+            entityProcessorService.process(gameData, world);
+        }
+        for (IPostEntityProcessingService postEntityProcessorService : getPostEntityProcessingServices()) {
+            postEntityProcessorService.process(gameData, world);
+        }
+    }
+
+
 
     private void updateVisuals() {
         // Remove entities that are no longer in the world
@@ -148,5 +169,17 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private Collection<? extends IGamePluginService> getPluginServices() {
+        return ServiceLoader.load(IGamePluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    }
+
+    private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
+        return ServiceLoader.load(IEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    }
+
+    private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
+        return ServiceLoader.load(IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 }

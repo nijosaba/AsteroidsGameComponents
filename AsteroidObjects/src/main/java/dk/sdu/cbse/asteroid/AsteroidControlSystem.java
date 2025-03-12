@@ -35,6 +35,7 @@ public class AsteroidControlSystem implements IEntityProcessingService {
 
 
             }
+
         }
     }
 

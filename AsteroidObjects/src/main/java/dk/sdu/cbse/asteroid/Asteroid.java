@@ -8,11 +8,14 @@ import java.util.Random;
 
 public class Asteroid extends Entities {
 
+    Random random = new Random();
+
     public Asteroid(GameData gameData) {
         setColor(Color.MAGENTA);
         spawnAtEdge(gameData); //nødvendigt da asteroider skal skal kendes skærmens dimensioner for at kunne spawne i kanterne
-        Random random = new Random();
         setSpeed(random.nextFloat() +0.5); // random mellem 0.5 og 1.5
+        setRadius(10);
         setSpawnCount(4);
+        setHealthPoint(1);
     }
 }

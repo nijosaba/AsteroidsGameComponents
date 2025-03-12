@@ -8,11 +8,11 @@ import dk.sdu.cbse.common.services.IEntityProcessingService;
 public class BulletControlSystem implements IEntityProcessingService, IBulletSPI {
 
 
-    private void moveBullet (Bullet bullet) { //opdatere bullet position i gameloopet
+    private void moveBullet(Bullet bullet) { //opdatere bullet position i gameloopet
 
         double radians = Math.toRadians(bullet.getRotation());
-        float dx = (float) Math.cos(radians) *(float) bullet.getSpeed();
-        float dy = (float) Math.sin(radians) *(float) bullet.getSpeed();
+        float dx = (float) Math.cos(radians) * (float) bullet.getSpeed();
+        float dy = (float) Math.sin(radians) * (float) bullet.getSpeed();
 
         bullet.setX(bullet.getX() + dx);
         bullet.setY(bullet.getY() + dy);
@@ -25,7 +25,14 @@ public class BulletControlSystem implements IEntityProcessingService, IBulletSPI
             if (entity instanceof Bullet) {
                 Bullet bullet = (Bullet) entity;
                 moveBullet(bullet);
-                //wrapPosition(bullet, gameData);
+
+                //fjerner bullet hvis den er udenfor skærmen
+                if (bullet.getX() < 0 || bullet.getX() > gameData.getDisplayWidth() ||
+                        bullet.getY() < 0 || bullet.getY() > gameData.getDisplayHeight()) {
+                    world.removeEntity(bullet);
+                }
+
+
             }
         }
     }

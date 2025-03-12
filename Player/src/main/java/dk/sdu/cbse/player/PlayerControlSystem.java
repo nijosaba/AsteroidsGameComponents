@@ -41,10 +41,6 @@ public class PlayerControlSystem implements IEntityProcessingService {
         }
     }
 
-    private void updateShape(Player player) {
-        // Optional: Rotate polygon coordinates if you want to visually update the ship direction
-    }
-
 
     @Override
     public void process(GameData gameData, World world) {
@@ -52,8 +48,9 @@ public class PlayerControlSystem implements IEntityProcessingService {
             if (entity instanceof Player) {
                 Player player = (Player) entity;
                 handleMovement(player, gameData);
-                updateShape(player);
-                player.wrapAroundScreen(player, gameData);
+
+                //player.wrapAroundScreen(player, gameData);
+                player.antiWrapAround(player, gameData);
 
                 // Change to isDown with cooldown
                 if (gameData.getKeys().isDown(GameKeys.SPACE)) {
@@ -68,10 +65,13 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 }
             }
         }
+
     }
+
     private Collection<? extends IBulletSPI> getBulletSPIs() {
         return ServiceLoader.load(IBulletSPI.class).stream()
                 .map(ServiceLoader.Provider::get)
                 .collect(Collectors.toList());
     }
+
 }

@@ -1,0 +1,6 @@
+Plugin-klasser (IGamePluginService): Disse klasser bruges til at initialisere og stoppe spilkomponenter.
+De bruges til at tilføje eller fjerne entiteter fra spillet, når spillet starter eller stopper.
+
+ControlSystem-klasser (IEntityProcessingService og IPostEntityProcessingService): Disse klasser bruges til at opdatere
+spillets logik hvert frame. IEntityProcessingService bruges til at opdatere entiteter før rendering,
+mens IPostEntityProcessingService bruges til at opdatere entiteter efter rendering.

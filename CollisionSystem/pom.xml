@@ -7,12 +7,12 @@
         <version>1.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>dk.sdu.cbse.player</groupId>
-    <artifactId>Player</artifactId>
+    <groupId>dk.sdu.cbse.collision</groupId>
+    <artifactId>CollisionSystem</artifactId>
     <packaging>jar</packaging>
 
-    <name>Player</name>
-    <url>https://maven.apache.org</url>
+    <name>CollisionSystem</name>
+    <url>http://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,18 +28,6 @@
         <dependency>
             <groupId>dk.sdu.cbse.common</groupId>
             <artifactId>Common</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>dk.sdu.cbse.bullet.system</groupId>
-            <artifactId>BulletSystem</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>dk.sdu.cbse.collision</groupId>
-            <artifactId>CollisionSystem</artifactId>
             <version>1.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
