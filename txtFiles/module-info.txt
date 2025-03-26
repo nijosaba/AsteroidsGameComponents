@@ -3,6 +3,16 @@ requires and exports are part of the Java Platform Module System (JPMS).
 provides and uses are part of the ServiceLoader mechanism.
 
 
+jigsaw module:
+- imports
+    -module: requires
+    -services: uses
+
+- exports
+    -module: exports
+    -module: provides someService with ServiceImpl
+
+
 requires	Importerer et andet modul.
 
 exports	Gør en pakke tilgængelig for andre moduler.

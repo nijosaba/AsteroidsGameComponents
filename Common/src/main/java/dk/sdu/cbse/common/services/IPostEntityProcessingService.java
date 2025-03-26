@@ -3,6 +3,11 @@ package dk.sdu.cbse.common.services;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 
+/**
+ * Service interface for post-processing game entities after main processing.
+ * Handles operations that need to occur after regular entity processing like
+ * collision detection.
+ */
 
 public interface IPostEntityProcessingService {
 
