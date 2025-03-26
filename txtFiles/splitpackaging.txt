@@ -1,0 +1,15 @@
+split packaging er når navnet på en package eller modul er det samme i to forskellige moduler.
+
+Eksempel:
+
+Modul A indeholder: dk.sdu.cbse.plugins.MyPluginA
+Modul B indeholder: dk.sdu.cbse.plugins.MyPluginB
+Begge moduler indeholder klasser i dk.sdu.cbse.plugins, altså samme package-navn. Det er det, man kalder split package.
+
+ Én package må kun høre til ét modul – ellers kan det give konflikter og uforudsigelig opførsel, fx ved class loading.
+ En package som dk.sdu.cbse.plugins svarer til mappen dk/sdu/cbse/plugins/ i filsystemet eller i en JAR-fil.
+
+ Det betyder:  Hvis to moduler begge har klasser i dk.sdu.cbse.plugins, så har de begge en mappe med det navn internt –
+ og det er dét, der skaber problemet med split packages.
+
+ Så: Det handler ikke kun om navnet på en mappe, men om at to moduler prøver at eje den samme package (mappe).
