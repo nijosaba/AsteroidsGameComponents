@@ -14,7 +14,7 @@ public class AsteroidPlugin implements IGamePluginService {
 
     private Entities createAsteroid(GameData gameData) {
         Entities asteroid = new Asteroid(gameData);
-        asteroid.setPolygonCoordinates(-10, -10, 10, -10, 10, 10, -10, 10); //første punkt (-10,-10), andet punkt (10,-10), tredje punkt (10,10), fjerde punkt (-10,10) = firkant
+        asteroid.setPolygonCoordinates(-15, -15, 15, -15, 15, 15, -15, 15); //første punkt (-10,-10), andet punkt (10,-10), tredje punkt (10,10), fjerde punkt (-10,10) = firkant
         asteroid.setX(random.nextInt(gameData.getDisplayWidth()));
         asteroid.setY(random.nextInt(gameData.getDisplayHeight()));
         asteroid.setHealthPoint(1);
