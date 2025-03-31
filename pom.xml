@@ -6,7 +6,7 @@
     <artifactId>asteroids.jpms</artifactId>
     <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>AsteroidsFX</name>
+    <name>AsteroidComponents</name>
     <repositories>
     </repositories>
 
@@ -61,6 +61,21 @@
                 <version>${spring.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jcl</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.integration</groupId>
                 <artifactId>spring-integration-core</artifactId>
                 <version>${spring.version}</version>
@@ -72,7 +87,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <build>
         <plugins>
             <plugin>
@@ -108,12 +122,19 @@
                                                 On Mac Devices this line should not be commented out
                                                 <argument>-XstartOnFirstThread</argument>
                         -->
+                        <argument>-Dorg.lwjgl.util.Debug=true</argument>
                         <argument>-Djava.library.path=libs</argument>
                         <argument>--module-path=mods-mvn</argument>
                         <argument>--class-path=libs/*</argument>
-
+                        <!-- because spark.core is an automatic module and actually required,
+                        monitor.observer.zero would be resolved as well and does not need
+                        to be added explicitly;
+                        I still wanted to do it for clarity, but for some reason that results
+                        in "java.lang.module.FindException: Module monitor.observer.zero not found";
+                        strange... -->
+                        <!--                        <argument>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=127.0.0.1:8000</argument>-->
                         <argument>--module=Core/dk.sdu.cbse.core.Main</argument>
-                        <argument>--add-modules=javafx.graphics,Player</argument>
+                        <argument>--add-modules javafx.graphics</argument>
                     </arguments>
                 </configuration>
             </plugin>
