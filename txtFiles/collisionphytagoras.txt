@@ -1,0 +1,25 @@
+hvis vi har 2 entities
+entity1.setX(100);
+entity1.setY(100);
+entity1.setRadius(5);
+
+og
+
+entity2.setX(100);
+entity2.setY(110);
+entity2.setRadius(5);
+
+så er :
+Midtpunkt 1: (100, 100)
+Midtpunkt 2: (100, 110)
+
+Beregner distance
+
+        double dx = entity1.getX() - entity2.getX(); = 0
+        double dy = entity1.getY() - entity2.getY(); = 10
+        double distance = Math.sqrt(dx * dx + dy * dy); = sqrt(0^2 + 10^2) = sqrt(100) = 10
+        sammenligne med sum af radius, da enemy og player har setCollisionRadius på 5, så:
+        tjekker vi distance op mod deres radius sum
+        return distance < (entity1.getCollisionRadius() + entity2.getCollisionRadius()); = 10 < 5 + 5 = 10
+
+        10 er ikke mindre end 10 så de kollidere ikke, (selvom de nok bør)

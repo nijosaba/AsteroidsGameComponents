@@ -5,21 +5,18 @@ import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IPostEntityProcessingService;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Collision implements IPostEntityProcessingService {
 
     public Collision() {
 
     }
 
-    //phytagoras
-    private boolean isColliding(Entities entity1, Entities entity2) {
-        double dx = entity1.getX() - entity2.getX();
+    //phytagoras mere i txtFilesMappe
+    protected boolean isColliding(Entities entity1, Entities entity2) {
+        double dx = entity1.getX() - entity2.getX(); //dx = difference in x mellem de 2 entities
         double dy = entity1.getY() - entity2.getY();
         double distance = Math.sqrt(dx * dx + dy * dy);
-        return distance < (entity1.getRadius() + entity2.getRadius());
+        return distance <= (entity1.getCollisionRadius() + entity2.getCollisionRadius());
     }
 
     @Override

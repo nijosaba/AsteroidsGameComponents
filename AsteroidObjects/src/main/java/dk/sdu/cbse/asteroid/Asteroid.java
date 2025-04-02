@@ -14,7 +14,7 @@ public class Asteroid extends Entities {
         setColor(Color.MAGENTA);
         spawnAtEdge(gameData); //nødvendigt da asteroider skal skal kendes skærmens dimensioner for at kunne spawne i kanterne
         setSpeed(random.nextFloat() +0.5); // random mellem 0.5 og 1.5
-        setRadius(10);
+        setCollisionRadius(10);
         setSpawnCount(4);
         setHealthPoint(1);
     }
