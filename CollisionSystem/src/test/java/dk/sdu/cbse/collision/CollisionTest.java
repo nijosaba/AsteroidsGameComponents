@@ -11,12 +11,12 @@ class CollisionTest {
         Collision collision = new Collision();
 
         Entities entity1 = new Entities();
-        entity1.setCollisionRadius(5);
+        entity1.setCollisionRadius(10);
         entity1.setX(100);
         entity1.setY(100);
 
         Entities entity2 = new Entities();
-        entity2.setCollisionRadius(5);
+        entity2.setCollisionRadius(10);
         entity2.setX(100);
         entity2.setY(110);
 
@@ -29,12 +29,12 @@ class CollisionTest {
         Collision collision = new Collision();
 
         Entities entity1 = new Entities();
-        entity1.setCollisionRadius(5);
+        entity1.setCollisionRadius(10);
         entity1.setX(100);
         entity1.setY(100);
 
         Entities entity2 = new Entities();
-        entity2.setCollisionRadius(5);
+        entity2.setCollisionRadius(10);
         entity2.setX(100);
         entity2.setY(140);
 
