@@ -9,7 +9,7 @@ public class Player extends Entities {
 
     public Player() {
         setColor(Color.LIME);
-        setCollisionRadius(10);
+        setCollisionRadius(5);
         setHealthPoint(3);
 
 
