@@ -1,6 +1,6 @@
 package dk.sdu.cbse.player;
 
-import dk.sdu.cbse.bullet.system.IBulletSPI;
+import dk.sdu.cbse.commonbullet.IBulletSPI;
 import dk.sdu.cbse.common.data.Entities;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.GameKeys;

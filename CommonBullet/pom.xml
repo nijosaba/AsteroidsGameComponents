@@ -7,11 +7,11 @@
         <version>1.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>dk.sdu.cbse.bullet.system</groupId>
-    <artifactId>BulletSystem</artifactId>
+    <groupId>dk.sdu.cbse.commonbullet</groupId>
+    <artifactId>CommonBullet</artifactId>
     <packaging>jar</packaging>
 
-    <name>BulletSystem</name>
+    <name>CommonBullet</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -20,20 +20,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>dk.sdu.cbse.common</groupId>
             <artifactId>Common</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>dk.sdu.cbse.commonbullet</groupId>
-            <artifactId>CommonBullet</artifactId>
             <version>1.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

@@ -39,23 +39,26 @@ class CollisionIntegrationTest {
     }
 
     @Test
-    void WhenEntitiesCollide() { //-1 vil faile pga. når entities rammer noget = -1 og når de bliver ramt = -1 så det = -2, en bug der bør fixes
-        collision.process(gameData, world);
+    void testWhenEntitiesCollide() {                                                                        //-1 vil faile pga. når entities rammer noget = -1 og når de bliver ramt = -1 så det = -2, en bug der bør fixes
+        collision.process(gameData, world); // processer collision og reducerer health point med 1
 
         Entities player = world.getEntity(entity1.getID());
         Entities enemy = world.getEntity(entity2.getID());
 
-        assertEquals(9, player.getHealthPoint(), "player should lose 1 health point");
-        assertEquals(9, enemy.getHealthPoint(), "enemy should lose 1 health point");
+        assertEquals(8, player.getHealthPoint(), "player should lose 1 health point");
+        assertEquals(8, enemy.getHealthPoint(), "enemy should lose 1 health point");
     }
 
     @Test
-    void WhenEntityHealthReachesZero() {
+    void testWhenEntityHealthReachesZero() {
         entity1.setHealthPoint(1); // fra oprindelig 10 til 1 for at teste at den forsvinder
 
-        collision.process(gameData, world);
+        collision.process(gameData, world); //reducere entity1's health point til 0 i selve metoden
 
-        assertNull(world.getEntity(entity1.getID()), "Entity1 should be removed from the world");
-        assertNotNull(world.getEntity(entity2.getID()), "Entity2 should still exist in the world");
+        Entities player = world.getEntity(entity1.getID());
+        Entities enemy = world.getEntity(entity2.getID());
+
+        assertNull(player, "player should be removed from the world");
+        assertNotNull(enemy, "enemy should still exist in the world");
     }
 }

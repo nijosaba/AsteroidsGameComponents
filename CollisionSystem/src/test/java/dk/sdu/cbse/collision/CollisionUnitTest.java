@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CollisionTest {
+class CollisionUnitTest {
 
     //unit test, tester om collision virker
     private Collision collision;
