@@ -2,7 +2,6 @@
 module Player {
     requires Common;
     requires javafx.graphics;
-    requires CollisionSystem;
     requires CommonBullet;
     exports dk.sdu.cbse.player;
 
