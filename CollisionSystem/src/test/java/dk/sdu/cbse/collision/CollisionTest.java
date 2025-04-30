@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CollisionTest {
 
-
+    //unit test, tester om collision virker
     private Collision collision;
     private Entities entity1;
     private Entities entity2;
