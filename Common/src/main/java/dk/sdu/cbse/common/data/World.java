@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- *
- * @author jcs
+ * The World class is a container for all entities in the game.
+ * It provides methods to add, remove, and retrieve entities.
  */
 public class World {
 
@@ -19,9 +19,6 @@ public class World {
         return entities.getID();
     }
 
-    public void removeEntity(String entityID) {
-        entityMap.remove(entityID);
-    }
 
     public void removeEntity(Entities entities) {
         entityMap.remove(entities.getID());
