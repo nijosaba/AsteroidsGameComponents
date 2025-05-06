@@ -9,6 +9,7 @@ import java.util.Random;
 public class Asteroid extends Entities {
 
     Random random = new Random();
+    private boolean isSplit = false;
 
     public Asteroid(GameData gameData) {
         setColor(Color.MAGENTA);
@@ -17,5 +18,19 @@ public class Asteroid extends Entities {
         setCollisionRadius(20);
         setSpawnCount(4);
         setHealthPoint(1);
+        this.isSplit = false;
     }
+
+    // til splitting
+    public Asteroid() {
+        setColor(Color.MAGENTA);
+        setHealthPoint(1); // Små asteroider har også 1 HP før de fjernes
+        this.isSplit = true; // flagget denne som en split-asteroide
+    }
+    // Getter for isSplit flag
+    public boolean isSplit() {
+        return isSplit;
+    }
+
+
 }

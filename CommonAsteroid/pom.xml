@@ -7,11 +7,11 @@
         <version>1.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>dk.sdu.cbse.asteroid</groupId>
-    <artifactId>AsteroidObjects</artifactId>
+    <groupId>dk.sdu.cbse.common.asteroid</groupId>
+    <artifactId>CommonAsteroid</artifactId>
     <packaging>jar</packaging>
 
-    <name>AsteroidObjects</name>
+    <name>CommonAsteroid</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -26,24 +26,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-        </dependency>
-        <dependency>
             <groupId>dk.sdu.cbse.common</groupId>
             <artifactId>Common</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>dk.sdu.cbse.collision</groupId>
-            <artifactId>CollisionSystem</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>dk.sdu.cbse.common.asteroid</groupId>
-            <artifactId>CommonAsteroid</artifactId>
             <version>1.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
