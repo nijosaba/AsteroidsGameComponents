@@ -18,6 +18,8 @@
         <module>Enemy</module>
         <module>AsteroidObjects</module>
         <module>CollisionSystem</module>
+        <module>CommonBullet</module>
+        <module>CommonAsteroid</module>
     </modules>
 
     <properties>

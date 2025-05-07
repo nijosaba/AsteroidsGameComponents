@@ -3,54 +3,33 @@ package dk.sdu.cbse.bullet.system;
 import dk.sdu.cbse.common.data.Entities;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
+import dk.sdu.cbse.commonbullet.Bullet;
+import dk.sdu.cbse.commonbullet.IBulletSPI;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 
 public class BulletControlSystem implements IEntityProcessingService, IBulletSPI {
 
-
-    private void moveBullet(Bullet bullet) { //opdatere bullet position i gameloopet
-
-        double radians = Math.toRadians(bullet.getRotation());
-        float dx = (float) Math.cos(radians) * (float) bullet.getSpeed();
-        float dy = (float) Math.sin(radians) * (float) bullet.getSpeed();
-
-        bullet.setX(bullet.getX() + dx);
-        bullet.setY(bullet.getY() + dy);
-
-    }
-
-    private void removeBulletIfOutOfBounds(Bullet bullet, GameData gameData, World world) {
-        if (bullet.getX() < 0 || bullet.getX() > gameData.getDisplayWidth() ||
-                bullet.getY() < 0 || bullet.getY() > gameData.getDisplayHeight()) {
-            world.removeEntity(bullet);
-        }
-    }
-
     @Override
     public void process(GameData gameData, World world) {
-        for (Entities entity : world.getEntities()) {
-            if (entity instanceof Bullet) {
-                Bullet bullet = (Bullet) entity;
-                moveBullet(bullet);
-                removeBulletIfOutOfBounds(bullet, gameData, world);
-            }
+        for (Entities bullet : world.getEntities(Bullet.class)) {
+            double changeX = Math.cos(Math.toRadians(bullet.getRotation()));
+            double changeY = Math.sin(Math.toRadians(bullet.getRotation()));
+            bullet.setX(bullet.getX() + changeX * bullet.getSpeed());
+            bullet.setY(bullet.getY() + changeY * bullet.getSpeed());
         }
     }
 
     @Override
-    public Entities createBullet(Entities shooter, GameData gameData) { //initializere ny bullet via SPI(serviceproviderinterface mechanisme)
+    public Entities createBullet(Entities shooter, GameData gameData) {
         Bullet bullet = new Bullet();
-
-        // Use shooter's position and rotation
-        double radians = Math.toRadians(shooter.getRotation());
-        double offsetX = Math.cos(radians);
-        double offsetY = Math.sin(radians);
-
-        bullet.setX(shooter.getX() + offsetX);
-        bullet.setY(shooter.getY() + offsetY);
+        bullet.setPolygonCoordinates(-1, -1, 1, -1, 1, 1, -1, 1);
+        double changeX = Math.cos(Math.toRadians(shooter.getRotation()));
+        double changeY = Math.sin(Math.toRadians(shooter.getRotation()));
+        bullet.setX(shooter.getX() + changeX * 10);
+        bullet.setY(shooter.getY() + changeY * 10);
         bullet.setRotation(shooter.getRotation());
-
+        bullet.setSpeed(5.0f);
+        bullet.setCollisionRadius(1);
         return bullet;
     }
-
 }

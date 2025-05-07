@@ -1,4 +1,4 @@
-package dk.sdu.cbse.collision;
+package dk.sdu.cbse.common.asteroid;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

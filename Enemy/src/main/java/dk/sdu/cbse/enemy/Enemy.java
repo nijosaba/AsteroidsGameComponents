@@ -7,7 +7,7 @@ public class Enemy extends Entities {
 
     public Enemy() {
         setColor(Color.RED);
-        setRadius(5);
+        setCollisionRadius(10);
         setHealthPoint(2);
 
 

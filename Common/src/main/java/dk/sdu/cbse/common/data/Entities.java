@@ -17,7 +17,7 @@ public class Entities implements Serializable {
     private double y;
     private double rotation;
     private double speed;
-    private double radius;
+    private double collisionRadius;
     private long lastShotTime = 0;
     private int healthPoint;
     private Color color = Color.WHITE;
@@ -147,11 +147,11 @@ public class Entities implements Serializable {
         this.spawnCount = spawnCount;
     }
 
-    public double getRadius() {
-        return radius;
+    public double getCollisionRadius() {
+        return collisionRadius;
     }
 
-    public void setRadius(double radius) {
-        this.radius = radius;
+    public void setCollisionRadius(double collisionRadius) {
+        this.collisionRadius = collisionRadius;
     }
 }
